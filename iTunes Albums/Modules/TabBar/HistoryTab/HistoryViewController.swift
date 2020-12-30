@@ -24,7 +24,7 @@ class HistoryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
     
-        cacheVM.loadCache {
+        cacheVM.loadRecords {
             tableView.reloadData()
         }
     }
@@ -61,7 +61,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.Cell.SavedCell.reuseID, for: indexPath) as! SavedTableViewCell
         
-        if let record = cacheVM.getElement(index: indexPath.row) {
+        if let record = cacheVM.getRecordInstance(index: indexPath.row) {
             cell.configure(item: record)
         }
         
@@ -71,7 +71,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if let record = cacheVM.getElement(index: indexPath.row) {
+        if let record = cacheVM.getRecordInstance(index: indexPath.row) {
             let vc = SearchResultViewController()
             vc.updateResults(for: record.query ?? "")
             navigationController?.pushViewController(vc, animated: true)
@@ -86,7 +86,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
-            if cacheVM.removeQuery(at: indexPath.row) {
+            if cacheVM.removeRecord(at: indexPath.row) {
                 tableView.deleteRows(at: [indexPath as IndexPath], with: .fade)
                 tableView.reloadData()
             }

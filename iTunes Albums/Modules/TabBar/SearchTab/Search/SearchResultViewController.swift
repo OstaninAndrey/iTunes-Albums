@@ -73,7 +73,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.Cell.ThumbCell.reuseID, for: indexPath) as! ThumbCell
         
-        if let vm = collectionVM.getElementVM(at: indexPath.item) {
+        if let vm = collectionVM.getItemViewModel(at: indexPath.item) {
             cell.configure(itemVM: vm)
         }
         
@@ -83,7 +83,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
-        guard let vm = collectionVM.getElementVM(at: indexPath.item) else {
+        guard let vm = collectionVM.getItemViewModel(at: indexPath.item) else {
             return
         }
         let vc = DetailedInfoViewController(itemVM: vm)

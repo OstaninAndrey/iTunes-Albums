@@ -15,11 +15,11 @@ class ItemViewModel {
     private let networkManager = NetworkManager()
     
     var wrapperType: String {
-        return item.wrapperType
+        item.wrapperType
     }
     
     private var id: Int {
-        return item.collectionId
+        item.collectionId
     }
     
     private var artworkUrl100: String {
@@ -27,11 +27,11 @@ class ItemViewModel {
     }
     
     var artistName: String {
-        return item.artistName
+        item.artistName
     }
     
     var collectionName: String {
-        return item.collectionName
+        item.collectionName
     }
     
     var trackName: String? {
@@ -41,7 +41,6 @@ class ItemViewModel {
     var trackNumber: Int? {
         item.trackNumber
     }
-    
     
     var collectionId: Int {
         item.collectionId

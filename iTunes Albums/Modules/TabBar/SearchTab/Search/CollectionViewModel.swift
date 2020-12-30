@@ -11,16 +11,16 @@ class CollectionViewModel {
     
     // MARK: Properties
     private let networkManager = NetworkManager()
-    private var galleryElements: [ItemViewModel] = []
+    private var itemCollection: [ItemViewModel] = []
     
     var count: Int {
-        return galleryElements.count
+        return itemCollection.count
     }
 
     // MARK: Network quieries
-    func getElementVM(at index: Int) -> ItemViewModel? {
-        if !galleryElements.isEmpty && galleryElements.count > index {
-            return galleryElements[index]
+    func getItemViewModel(at index: Int) -> ItemViewModel? {
+        if !itemCollection.isEmpty && itemCollection.count > index {
+            return itemCollection[index]
         } else {
             return nil
         }
@@ -39,10 +39,10 @@ class CollectionViewModel {
             }
             
             collection?.forEach({ (item) in
-                self?.galleryElements.append(ItemViewModel(item: item))
+                self?.itemCollection.append(ItemViewModel(item: item))
             })
             
-            self?.galleryElements.sort(by: {$0.collectionName < $1.collectionName})
+            self?.itemCollection.sort(by: {$0.collectionName < $1.collectionName})
             completion()
             print(self?.count as Any)
         }
@@ -54,7 +54,7 @@ class CollectionViewModel {
         
         networkManager.getSearchResult(term: "клава кока", limit: 20) { [weak self] (collection, err) in
             collection?.forEach({ (item) in
-                self?.galleryElements.append(ItemViewModel(item: item))
+                self?.itemCollection.append(ItemViewModel(item: item))
             })
             print(self?.count as Any)
             completion()
@@ -63,7 +63,7 @@ class CollectionViewModel {
     
     // MARK: Collection managing methods
     private func clearCollection() {
-        galleryElements = []
+        itemCollection = []
     }
     
     // MARK: DB methods

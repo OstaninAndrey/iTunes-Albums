@@ -21,7 +21,7 @@ class AlbumFaceCell: UITableViewCell {
         fillWithData()
     }
     
-    func fillWithData() {
+    private func fillWithData() {
         
         itemVM?.loadImage { (image) in
             DispatchQueue.main.async {

@@ -16,7 +16,7 @@ class CacheViewModel {
     }
     
     // MARK: Chache managing methods
-    func getElement(index: Int) -> SearchRecord? {
+    func getRecordInstance(index: Int) -> SearchRecord? {
         if !records.isEmpty, records.count >= index {
             return records[index]
         } else {
@@ -24,13 +24,13 @@ class CacheViewModel {
         }
     }
     
-    func loadCache(completion: () -> Void) {
+    func loadRecords(completion: () -> Void) {
         records = DatabaseHelper.shared.getAllRecords()
         records.sort(by: {$0.date! > $1.date!})
         completion()
     }
     
-    func removeQuery(at index: Int) -> Bool {
+    func removeRecord(at index: Int) -> Bool {
         if DatabaseHelper.shared.remove(id: records[index].id ?? UUID()) {
             records.remove(at: index)
     
